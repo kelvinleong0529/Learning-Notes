@@ -31,7 +31,7 @@
 
 # **Creating a React Application**
 
-[Downlaod the latest Node.js here](https://nodejs.org/en/)
+[Download the latest Node.js here](https://nodejs.org/en/)
 
 ### Command to generate a REACT project:
 
