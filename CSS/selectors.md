@@ -12,7 +12,7 @@ p {   /* select all HTML elements with <p> tags */
   color: red;
 }
 
-#para1 {   /* select all HTML elements with if="para1" */
+#para1 {   /* select all HTML elements with id="para1" */
   text-align: center;
   color: red;
 }
