@@ -4,6 +4,8 @@
 - **Cluster module** uses the **fork** method to spawn different proccess that allow back and forward communication
 - **Child process** is another module that allows us to run subprocess {using **exec,execFile, spawn**}. These child process are often used to interact with the shell and run code from different languages, often used to run shell scripts and commands
 - **SPAWN** method don't use buffer but instead streams, hence there isn't length limit on the stdout
+- **DRAWBACKS**: No shared memory between all child process (all data is cloned), and spawning process is not cheap (OS need to allocate resouces for these process)
+- Using **Cluster Module** & **Child_Process** module, each child thread spawned is associated with a process
 ## **Cluster Module**
 ```javascript
 const cluster = require("cluster")
@@ -88,4 +90,76 @@ child.on("exit",(code,signal)=>{
     if (signal) console.log(`Process exit with signal: ${signal}`)
     console.log(`Spawn child process finsih!`)
 })
+```
+## **Worker threads**
+- for each worker thread that we create we will also need to create an instance of V8, node engine, but all the worker threads is running under **ONE PROCESS**
+- by default the main thread and worker threads do not share the environment variables
+- we can send resource limit to worker threads once the worker reach the limit it will just terminate
+## **Worker**
+- Worker Events:
+1. message: worker thread communicate with parent thread
+2. exit: worker has stopped
+3. error: worker thread throws an uncaught exception
+4. online: worker has started executing JS code
+```javascript
+const { Worker } = require("worker_threads")
+
+// the script that we want the worker thread to execute
+const worker = new Worker("./worker.js")
+
+worker.on("message",message => console.log(message))
+worker.postMessage("ping")
+```
+
+## **Parent**
+```javascript
+const { parentPort } = require("worker_threads")
+parentPort.on("message",message => parentPort.postMessage({pong:message}))
+```
+
+```javascript
+const { Worker, isMainThread, workerData } = require("worker_threads")
+
+// spawn a new worker thread if it's the main / parent thread
+// else just log the workerData out
+if (isMainThread) {
+    const worker = new Worker(__filename, {workerData: "Hello"})
+} else {
+    console.log(workerData) // "Hello"
+}
+```
+
+```javascript
+// by default the main thread and worker threads do not share environment variables
+const { Worker, isMainThread } = require("worker_threads")
+
+if (isMainThread) {
+    const worker = new Worker(__filename)
+    worker.on("exit",()=>{
+        console.log(process.env.SET_IN_WORKER)  // undefined
+    })
+} else {
+    process.env.SET_IN_WORKER = "foo"
+}
+
+// use env: SHARE_ENV to allow the main and worker thread to share the same env
+const { Worker, isMainThread } = require("worker_threads")
+
+if (isMainThread) {
+    const worker = new Worker(__filename,{env: SHARE_ENV})
+    worker.on("exit",()=>{
+        console.log(process.env.SET_IN_WORKER)  // foo
+    })
+} else {
+    process.env.SET_IN_WORKER = "foo"
+}
+```
+```javascript
+// messageChannel
+
+const { messageChannel } = require("worker_threads")
+const { port1,port2 } = new MessageChannel()
+
+port1.on("message",(message)=> console.log(message))
+port2.postMessage({foo:"bar"})
 ```
