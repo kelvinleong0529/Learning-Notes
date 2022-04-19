@@ -59,6 +59,13 @@ function reducer(object,action) {
         description: "..."
     }
 }
+{
+    type: "itemPaid",
+    payload : {
+        id: 1,
+        description: "..."
+    }
+}
 ```
 ## **2. Defining the reducer**
 ```javascript
@@ -75,11 +82,15 @@ const reducer = function (state=[],action) {
                 {
                     id: ++id,
                     description: action.payload.description,
-                    resolved:false
+                    paid:false
                 }
             ];
         case "itemRemoved":
             return state.filter(item => item.id !== action.payload.id);
+        case: "itemPaid":
+            return state.map(item => 
+            item.id !== action.payload.id? item : {...item,paid:true})
+            // if payload id match the overwrite the "paid" property to true
         default:
             return state;
     }
@@ -117,7 +128,7 @@ store.dispatch({
     }
 })
 
-// store's state = {id:1,description:"iceCream",resolved:false}
+// store's state = {id:1,description:"iceCream",paid:false}
 
 // dispatch action to remove item
 store.dispatch({
