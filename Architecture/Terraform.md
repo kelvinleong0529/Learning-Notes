@@ -15,4 +15,4 @@
 
 # **Terraform Architecture**
 - has mainly 2 parts, **CORE** and **STATE**
-- **CORE** Takes the terraform configuration prepared (what to create/configure) by the users, take sthe Terraform State (where it keeps the up-to-date state of how the current setup of the infra looks like), compared the current state and the desired state, and figures out what needs to be done (created/updated/destroyed)
+- **CORE** Takes the terraform configuration prepared (what to create/configure) by the users, take the Terraform **STATE** (where it keeps the up-to-date state of how the current setup of the infra looks like), compared the current state and the desired state, and figures out what needs to be done (created/updated/destroyed)
