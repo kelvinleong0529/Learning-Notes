@@ -54,20 +54,18 @@ docker image ls OR docker images
 ```
 ### **3. Run a docker image**
 ```cmd
-docker run helll-docker
-// run a docker image named "hello-docker"
+docker run <image-name>
 ```
 ### **4. Push a docker image to docker hub**
 ```cmd
-docker tag hello-docker leong0529/hello-docker-repo:1.0
+docker tag <image-name> <username>/<docker-repo-name>:<docker-tag-name>
 // docker tag "name of the image" "docker username"/"docker repo name":"docker tag name"
-docker push leong0529/hello-docker-repo:1.0
+docker push <username>/<docker-repo-name>:<docker-tag-name>
 // docker push "docker username"/"docker repo name":"docker tag name"
 ```
 ### **5. Pulling a docker image from docker hub**
 ```cmd
-docker pull leong0529/hello-docker-repo
-// docker pull "docker username"/"docker repo name"
+docker pull <username>/<docker-repo-name>
 ```
 ### **6. Removing docker containers or images**
 ```cmd
@@ -80,9 +78,10 @@ docker rmi -f <image_id>
 ```cmd
 1. docker ps == docker container ls// get all the container process running in docker
 2. docker ps -a // list all the stopped containers
-3. docker run -it "image_name" // start a container process in interactive mode
+3. docker run -it <image_name> // start a container process in interactive mode
 4. docker ls -q // return the image ID of all the docker images
 5. docker image rm $(docker ls -q)
+6. docker inspect <container-id>: inspect the details of the container
 ```
 
 # **Linux in Docker**
@@ -112,31 +111,3 @@ docker rmi -f <image_id>
 6. tail -n 5 docker: only get the last 5 lines of the file named "docker"
 ## **Redirection in Linux**
 1. cat file1.txt file2.txt > file3.txt: concatenate all the contents in file1.txt & file2.txt and move it to file3.txt
-
-# **YAML file**
-- parsing YAML files is slower than parsing JSON files, hence it is not used all the time, because parser doesnt know whether is it reading string or number, it needs to read everthing and try to evaluate it
-- YAML files is used for configuration files, and JSON is used for exchanging data
-```yaml
----
-course_name: Docker Learning Notes
-# below is an array
-tags:
- - software
- - devops
-# below is an object
-author:
- name: Kelvin Leong
- age: 24
-```
-
-# **Docker Compose**
-- a tool that help define and share multi-container applications, used to manage several containers
-- need to configrued a "docker-compose.yaml" file for docker compose
-```yaml
----
-version: "3.8" # version of the docker compose that we are using
-services:
- frontend:
- backend:
- database:
-```
