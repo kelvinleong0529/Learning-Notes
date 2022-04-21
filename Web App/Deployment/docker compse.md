@@ -54,6 +54,7 @@ services:
     frontend:
         build: ./frontend # specify how to build the image for front-end services
         ports:
+            # map port 3000 of host to port 3000 of container
             - 3000:3000
     backend:
         build: ./backend
@@ -63,4 +64,9 @@ services:
         image: mongo:4.0-xenial
         ports:
             - 27017:27017
+        volumes:
+        - vidly:/data/db
+
+volumes:
+    - vidly
 ```
