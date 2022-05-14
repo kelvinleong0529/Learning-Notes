@@ -78,7 +78,7 @@ docker rmi -f <image_id>
 ```cmd
 1. docker ps == docker container ls// get all the container process running in docker
 2. docker ps -a // list all the stopped containers
-3. docker run -it <image_name> // start a container process in interactive mode
+3. docker run -it <image_name> // start a container process in interactive mode, 't' gives us the pseudo terminal
 4. docker ls -q // return the image ID of all the docker images
 5. docker image rm $(docker ls -q)
 6. docker inspect <container-id>: inspect the details of the container
