@@ -43,13 +43,12 @@ fs.readFile('/file.json', (err, data) => {
 
 # **JavaScript Callback Queue**
 ![alt text](https://www.freecodecamp.org/news/content/images/size/w1000/2021/09/taskQ.png)
-- JavaScript maintains a queue of callback functions called **callback queue** or **task queue**
-- JavaScript engine keeps executing the functions in the call stack
-- It doesn't put the callback function straight into the stack, there is no question of any code waiting for/blocking execution in the stack
-- The engine creates a loop to look into the queue periodically to find what it needs to pull from there
-- The engine creates a **loop** to look into the queue periodically to find what it needs to pull from there. 
-- It pulls a callback function from the queue to the call stack when the stack is empty. 
-- Now the callback function executes generally as any other function in the stack. The loop continues. This loop is famously known as the **Event Loop**
+1. JavaScript maintains a queue of callback functions called **callback queue** or **task queue**
+2. JavaScript engine keeps executing the functions in the call stack
+3. It doesn't put the callback function straight into the stack, there is no question of any code waiting for/blocking execution in the stack
+4. The engine creates a **loop** to look into the queue periodically to find what it needs to pull from there. 
+5. It pulls a callback function from the queue to the call stack when the stack is empty. 
+6. Now the callback function executes generally as any other function in the stack. The loop continues. This loop is famously known as the **Event Loop**
 ```javascript
 function f1() {
     console.log('f1');
