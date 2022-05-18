@@ -8,6 +8,10 @@
 - scale vertically, but not horizontally
 - vertical scaling is only possible to a certain extend
 - **ACID** Compliant: Atomicity, Consistency, Isolation and Durability
+1. Atomicity: Ensure all operation within a work unit are complete successfully (either do all or don't do at all)
+2. Consistency - Ensure database properly change states upon successfully committed transaction
+3. Isolation - ensure transaction to operate independently of and transparent to each other
+4. Durability - Ensure that result or effect of a commited transaction presists in the case of a system failure
 - **best for**: Most Apps
 - **not ideal for**: unstructured data
 
