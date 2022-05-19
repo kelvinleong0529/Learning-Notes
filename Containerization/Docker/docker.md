@@ -43,54 +43,64 @@ CMD node app.js
 ```
 ## **Docker basic commands**
 ### **1. Building a Docker Image**
-```cmd
+```docker
 docker build -t hello-docker .
-// build an image with hello-docker as the tag name
-// find the relevant Dockerfile in the current directory
+## build an image with hello-docker as the tag name
+## find the relevant Dockerfile in the current directory
 ```
 ### **2. Check all the docker images**
-```cmd
+```docker
 docker image ls OR docker images
 ```
 ### **3. Run a docker image**
-```cmd
+```docker
 docker run <image-name>
+
+# run docker in interactive mode and link host port 8000 to container port 8000
+docker run -it -p 8000:8000 {container_name}
 ```
 ### **4. Push a docker image to docker hub**
-```cmd
+```docker
 docker tag <image-name> <username>/<docker-repo-name>:<docker-tag-name>
-// docker tag "name of the image" "docker username"/"docker repo name":"docker tag name"
+## docker tag "name of the image" "docker username"/"docker repo name":"docker tag name"
 docker push <username>/<docker-repo-name>:<docker-tag-name>
-// docker push "docker username"/"docker repo name":"docker tag name"
+## docker push "docker username"/"docker repo name":"docker tag name"
 ```
 ### **5. Pulling a docker image from docker hub**
-```cmd
+```
 docker pull <username>/<docker-repo-name>
 ```
 ### **6. Removing docker containers or images**
-```cmd
-docker rm <container_id> // removed a stopped container
-docker rm $(docker rm -a -q) // removed all stopped container
-docker rm -f // force the removal of a running container
+```docker
+docker rm <container_id> ## removed a stopped container
+docker rm $(docker rm -a -q) ## removed all stopped container
+docker rm -f ## force the removal of a running container
 docker rmi <image_id>
 docker rmi -f <image_id>
 ```
-### **7. Killing a container**
+### **7. Stoping a container**
+- **STOP** leads to a **SAFE** exit
+- **KILL** leads to a **UNSAFE** exit
+```docker
+1. docker stop {container_name OR container_id}
 ```
-1. docker kill {container_id} // kill a specific container with the ID
+### **8. Killing a container**
+```docker
+1. docker kill {container_id} ## kill a specific container with the ID
 2. docker kill $(docker ps -a -q)
-// "docker ps -q -a" list all the containers ID
-// docker kill $(docker ps -a -q) kill all the existing containers
+## "docker ps -q -a" list all the containers ID
+## docker kill $(docker ps -a -q) kill all the existing containers
 ```
 
-### **7. Others**
-```cmd
-1. docker ps == docker container ls// get all the container process running in docker
-2. docker ps -a // list all the stopped containers
-3. docker run -it <image_name> // start a container process in interactive mode, 't' gives us the pseudo terminal
-4. docker ls -q // return the image ID of all the docker images
+### **9. Others**
+```docker
+1. docker ps == docker container ls ## get all the container process running in docker
+2. docker ps -a ## list all the stopped containers
+3. docker run -it <image_name> ## start a container process in interactive mode, 't' gives us the pseudo terminal
+4. docker ls -q ## return the image ID of all the docker images
 5. docker image rm $(docker ls -q)
 6. docker inspect <container-id>: inspect the details of the container
+7. docker restart {container_name OR container_ID}
 ```
 
 # **Linux in Docker**
