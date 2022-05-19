@@ -6,7 +6,7 @@
 | let     | Block scope    | No       | Yes               | No                |
 | const   | Block scope    | No       | No                | No                |
 - **var** variabels are **function-scoped**, meaning they recognize functions as having a separate scope
-- **let** and **const** are **block-scoped**. This means that a new, local scope is created from any kind of block, including function blocks, if statements, and for and while loops
+- **let** and **const** are **block-scoped**. This means that a new, local scope is created from any kind of block, including **FUNCTION** blocks, **IF** statements, and **FOR** and **WHILE** loops
 ```javascript
 // Initialize a global variable
 var species = "human";
