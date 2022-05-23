@@ -1,4 +1,4 @@
-# **what is Redis**
+# **Redis**
 - Redis stores data in the form of key-value pair, it's not good in storing sturctured data like in SQL
 - Redis does not run on the disk or stores the information on disk, instead it runs on the working memory, the RAM of our computer. means it's incredibily **FAST**, but it also means **HIGH VOLATILITY** becuase if system crashes we will lose all the info unless we backed them up
 - Mostly used for **CACHING**, things that we access a lot, or those that need alot of time to compute

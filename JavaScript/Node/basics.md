@@ -69,7 +69,7 @@ fs.rmdirSync("stuff")
 - Client and servers have a unique IP address to differentiate them
 - When a client wants to communicate with a server, it will first need to open a **SOCKET**, basically is a channel that the information can be sent between the 2 computers, the info sent is structured via different protocols (HTTP, FTP)
 - When the protocol has been decided, the info is passed through in the socket between the client and server via TCP, TCP will split the data into packets (smaller chunks of data) and transfer them along the socket
-- There can multiple programs running on a server, **PORT** is used to differentiate the incoming requests are meant for which **APPLICATION**
+- There can multiple programs running on a server, **PORT** is used to differentiate the incoming requests are meant for which different **APPLICATION**
 - In request or response data, there is **HEADERS** (contains content-type, status)
 ```javascript
 var http = require("http")

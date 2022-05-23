@@ -70,3 +70,15 @@ services:
 volumes:
     - vidly
 ```
+
+```
+docker-compose up 
+// build docker compose based on docker-compose.yaml
+
+docker-compose down 
+// stop the compose docker and remove the container
+
+docker-compose up --build -d 
+// 'build' is to check if any files has changed
+// if detect any changes rebuild the container
+// '-d' is to run in detached mode

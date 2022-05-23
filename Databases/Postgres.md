@@ -12,6 +12,17 @@ psql -U postgres
 # **CRUD**
 ## **1. Create**
 ```sql
+CREATE TABLE accounts (
+	user_id serial PRIMARY KEY,
+	username VARCHAR ( 50 ) UNIQUE NOT NULL,
+	password VARCHAR ( 50 ) NOT NULL,
+	email VARCHAR ( 255 ) UNIQUE NOT NULL,
+	created_on TIMESTAMP NOT NULL,
+    last_login TIMESTAMP 
+);
+```
+## **2. Insert**
+```sql
  INSERT INTO TABLE_NAME  
  (column1,  
  column2,  
@@ -26,14 +37,14 @@ VALUES ('Alex',22),('Paul',24)
 INSERT INTO student (name,age)
 VALUES (DEFAULT,DEFAULT)
 ```
-## **2. Update**
+## **3. Update**
 ```sql
 UPDATE table_name 
 SET age = 25 
 WHERE firstname = 'Kelvin' 
 AND lastname = 'Leong'
 ```
-## **3. Delete**
+## **4. Delete**
 ```sql
 DELETE FROM table_name
 WHERE [CONDITION]
