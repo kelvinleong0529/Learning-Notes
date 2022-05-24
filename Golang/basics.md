@@ -76,3 +76,12 @@ func main() {
 	close(c)
 }
 ```
+
+# **Slice**
+- lightweight data structure of variable length sequence for storing homogeneous data, **more convenient, powerful and flexible** than array
+- has 3 components:
+1. pointer - This is used for pointing to the first element of the array accessible via slice, doesn’t need to be the first element of the array
+2. length - This is used for representing the total elements count present in the slice.
+3. capacity - This represents the capacity up to which the slice can expand.
+
+![slice](https://d3n0h9tb65y8q.cloudfront.net/public_assets/assets/000/001/744/original/slice.png?1637335112)

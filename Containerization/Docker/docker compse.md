@@ -82,3 +82,43 @@ docker-compose up --build -d
 // 'build' is to check if any files has changed
 // if detect any changes rebuild the container
 // '-d' is to run in detached mode
+```
+# **Docker Networking**
+- by default compose sets up a single network for the app, each container for a service joins the default network and is both **reachable** by the other containers on that network
+```yaml
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+  db:
+    image: postgres
+    ports:
+      - "8001:5432"
+
+# A network called myapp_default is created.
+# A container is created using web’s configuration. It joins the network myapp_default under the name web.
+# A container is created using db’s configuration. It joins the network myapp_default under the name db.
+```
+- **HOST_PORT** and **CONTAINER__PORT**, in the example above, for **db**, the **HOST_PORT** is 8001 and the container port is 5432 (postgres default). Networked service-to-service communication uses the **CONTAINER_PORT**. When **HOST_PORT** is defined, the service is accessible outside the swarm as well.
+
+# **Docker Links**
+- links allow us to define extra aliases by which a service is reachable from another service
+```yaml
+version: "3.9"
+services:
+
+  web:
+    build: .
+    links:
+      - "db:database"
+  db:
+    image: postgres
+
+# 'db' is reachable at the hostnames 'db' & 'database'
+```
+
+# **Docker Expose & ports**
+- **expose** allow us to expose a container (service) ports without publishing them or binding them to the host ports (eg: ports are not exposed to host machines, only exposed to other services/containers)
+- **ports** allow us to specifiy both host and container port numbers, and share the ports among other services and exposed to the host machine to a random or given port

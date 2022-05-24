@@ -109,3 +109,15 @@ docker rmi -f <image_id>
 - linux has a package database that contains hundreds of packages
 - linux file system is organized if tree structure (hierarchical structure)
 - everything in linux is a folder (blue files represent a directory)
+
+# **Docker Expose**
+- **EXPOSE** function is used to inform Docker that the container should listen on a particular network port at runtime
+- this does not map the container port to the host port
+- by default, Docker use the **TCP Protocol** (can also use **UDP Protocol**)
+
+# **Docker Ports**
+- if we want to bind a specific port on host to the container, use the '-p' tag
+```cmd
+docker run -d -p 4321:5432 postgres
+// bind the local port of '4321' to the container port of '5432'
+```
