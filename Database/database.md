@@ -64,3 +64,19 @@
 - Hybrid, a db management system designed to support multiple data models
 - can sotre data as key/value paris, graphs pr documents
 - can access data with 1 declarative query language
+
+# **Table Partitioning**
+- partitioning is a process where very large tables are divided into multiple smaller parts
+- by splitting a large table into a smaller, individial tables, queries that only access a fraction of the data can run faster because there is less data to scan
+- main goal of partitioning is to aid in maintanence of large tables and reduce overall response time to read and load data for SQL operations
+
+## **Vertical Partitioning**
+- splits a table into 2 or more tables containing different columns
+- mostly used to increase SQL server performance, especially in cases where a query retrieves all columns from a table that contains a number of very wide text
+- the access time can be reduce by splitting the columns into different table, linking them with foerign keys
+![vertical partitioning](https://www.sqlshack.com/wp-content/uploads/2014/04/VerticalPartitioning.png)
+
+## **Horizontal Partitioning**
+- divides a table into multiple tables that contain the same number of columns, but fewer rows
+- For example, if a table contains a large number of rows that represent monthly reports it could be partitioned horizontally into tables by years, with each table representing all monthly reports for a specific year. This way queries requiring data for a specific year will only reference the appropriate table. Tables should be partitioned in a way that queries reference as few tables as possible.
+![horizontal partitioning](https://www.sqlshack.com/wp-content/uploads/2014/04/HorizontallyPartitioning.png)

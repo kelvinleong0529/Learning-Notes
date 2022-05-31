@@ -7,6 +7,7 @@ psql -U postgres
 \list ## command to list all the databases
 \c dbname ## switch connection a new database
 \! cls ## clean and clear the CMD logs
+\dt list all the tables in current database
 ```
 
 # **CRUD**
