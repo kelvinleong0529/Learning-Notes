@@ -1,81 +1,60 @@
-# **Goroutine**
-- lighweight execution thread in Go programming language and a function that executes concurrently with the rest of the program
-- incredibly cheap when compared to traditional threads as the overhead of creating goroutine is very low
-- **main** goroutine must be running for any other goroutine to run, if **main** goroutine terminates, then the program will exit and no other goroutine will run
-```golang
-package main
-import (
-    "fmt"
-    "time"
-)
+# **Go Modules**
+- Go module keeps track on our code's dependencies, it include the name of the module and the Go version our code supports
+- create a Go module using the following command:
+```
+go mod init kelvin.leong/examples
+```
 
-// Prints numbers from 1-3 along with the passed string
-func foo(s string) {
-    for i := 1; i <= 3; i++ {
-        time.Sleep(100 * time.Millisecond)
-        fmt.Println(s, ": ", i)
+# **Variadic Functions**
+- Variadic functions are functions that can be called with multiple arg
+```golang
+func sum(nums ...int) {
+    total := 0
+    for _,num := range nums {
+        total += num
     }
+    fmt.Println(total)
 }
 
 func main() {
-    
-    // Starting two goroutines
-    go foo("1st goroutine")
-    go foo("2nd goroutine")
+    sum(1,2)
+    sum(1,2,3)
 
-    // Wait for goroutines to finish before main goroutine ends
-    time.Sleep(time.Second)
-    fmt.Println("Main goroutine finished")
+    // if we aldy have multiple args stored in a slice
+    // we can apply them to a variadic function using 'func(slice...)'
+    nums := []int{1,2,3,4}
+    sum(nums...)
 }
 ```
 
-# **Gochannel**
-- in **Golang**, channels are a means through which different **goroutine** communicate
-- think of them as pipes through which we can connect with different concurrent goroutines, communication is bidirectional by default
-- by default, channels send and receive until the other side is ready, allowing goroutine to synchronize without explicit locks or condition variables
+# **Advanced Function**
 ```golang
-make (chan [value-type]) // make a channel, where [value-type] is the data type of the values to send and recive, eg: int
-
-// '<-' is the channel operator
-
-// send values
-channel <-
-
-// receive values
-<- channel
-
-close (channel) // close a channel
-
-// both sending and receiving are blockign operations by default
+func test2 (myFunc func(x int) int) func(string) int{}
+// test2 => function where arg is 'another function with int as arg and return int'
+// test 2 => return type is a function that takes string as arg and return int
 ```
-
 ```golang
-package main
-import "fmt"
-
-// Prints a greeting message using values received in
-// the channel
-func greet(c chan string) {
-
-	name := <- c	// receiving value from channel
-	fmt.Println("Hello", name)
+func main() {
+    test := func(x int) int {
+        return x * -1
+    }(8)    // immediately pass '8' as an argument and call the function
+    fmt.Println(test) // prints -8
+}
+```
+```golang
+func returnFunc(x string) func() {
+    // returnFunc returns a reference to a function
+    return func() {fmt.Println(x)}
 }
 
 func main() {
-
-	// Making a channel of value type string
-	c := make(chan string)
-
-	// Starting a concurrent goroutine
-	go greet(c)
-
-	// Sending values to the channel c
-	c <- "World"
-
-	// Closing channel
-	close(c)
+    returnFunc("Hello World")()
+    // we need the 2nd () to call the function returned by 'returnFunc'
+    x := returnFunc("goodbye")
+    x() // prints "goodbye"
 }
 ```
+
 
 # **Slice**
 - lightweight data structure of variable length sequence for storing homogeneous data, **more convenient, powerful and flexible** than array
