@@ -3,12 +3,6 @@
 - incredibly cheap when compared to traditional threads as the overhead of creating goroutine is very low
 - **main** goroutine must be running for any other goroutine to run, if **main** goroutine terminates, then the program will exit and no other goroutine will run
 ```golang
-package main
-import (
-    "fmt"
-    "time"
-)
-
 // Prints numbers from 1-3 along with the passed string
 func foo(s string) {
     for i := 1; i <= 3; i++ {
@@ -50,9 +44,6 @@ close (channel) // close a channel
 ```
 
 ```golang
-package main
-import "fmt"
-
 // Prints a greeting message using values received in
 // the channel
 func greet(c chan string) {
@@ -74,6 +65,81 @@ func main() {
 
 	// Closing channel
 	close(c)
+}
+```
+- `select` statement let's a goroutine wait on multiple communication operations
+- `select` blocks until one of it's cases can run, then it executes that case, it then chosoes one at random if multiple are ready
+```golang
+func main() {
+    ninja1 := make(chan string)
+    ninja2 := make(chan string)
+
+    go captainElect(ninja1, "Ninja 1")
+    go captainElect(ninja2, "Ninja 2")
+
+    // the select statement will block until one of the cases is ready for execution
+    // in the case of multiple cases are ready, it will pick one randomly
+    select {
+    case message := <- ninja1:
+        fmt.Println(message)
+    case message := <- ninja2:
+        fmt.Println(message)
+    default:
+    // this will get executed if neither one of the cases above is fulfilled
+        fmt.Printlin("Neither")
+    }
+}
+
+func captainnElect(ninja chan string, message string) {
+    ninja <- message
+}
+```
+
+# **WaitGroup**
+- an alternative for Goroutine synchronization
+```golang
+func main () {
+    go atatck("Tommy")
+}
+
+func attack(evilNinja string) {
+    fmt.Println("Attacked evil ninja:",evilNinja)
+}
+
+// if we run this program, it will not print anything out
+// because the main() function will finish its execution before the goroutine attack() finishes
+```
+```golang
+func main() {
+    var beeper sync.WaitGroup
+    beeper.Add(1) // specify we only need to wait for 1 goroutine
+    go attack("Tommy",&beeper) 
+    // need to pass the WaitGroup as pointer
+    // else will get deadlock as the changes on WaitGroup is done on the local copy
+    beeper.Wait() // pause until the WaitGroup has collected all the goroutine signals
+    fmt.Println("Mission Complete")
+}
+
+func attack (ninja string, beeper *sync.WaitGorup) {
+    fmt.Println("Attacked evil ninja:",ninja)
+    beeper.Done()
+}
+```
+```golang
+func main() {
+    var evilNinjas []string = {"Tommy","Johnny","Boby"}
+    var beeper sync.WaitGroup
+    beeper.Add(len(evilNinjas))
+    for _,ninjas := range evilNinjas {
+        go attack(ninjas,&beeper)
+    }
+    beeper.Wait()
+    fmt.Println("Mission Completed")
+}
+
+func attack (ninja string, beeper *sync.WaitGroup) {
+    fmt.Println("Attacked Ninja:",ninja)
+    beeper.Done()
 }
 ```
 
