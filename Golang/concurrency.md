@@ -113,10 +113,13 @@ func attack(evilNinja string) {
 func main() {
     var beeper sync.WaitGroup
     beeper.Add(1) // specify we only need to wait for 1 goroutine
+    
     go attack("Tommy",&beeper) 
     // need to pass the WaitGroup as pointer
     // else will get deadlock as the changes on WaitGroup is done on the local copy
+    
     beeper.Wait() // pause until the WaitGroup has collected all the goroutine signals
+    
     fmt.Println("Mission Complete")
 }
 
@@ -141,6 +144,75 @@ func attack (ninja string, beeper *sync.WaitGroup) {
     fmt.Println("Attacked Ninja:",ninja)
     beeper.Done()
 }
+```
+# **Mutex**
+## **1. Regular Mutex**
+```golang
+var (
+    count int
+    lock sync.Mutex
+)
+
+func main() {
+    var numIterations int = 1000
+    for i:= 0; i<numIterations; i++ {
+        go increment()
+    }
+    time.Sleep(time.Second)
+    fmt.Println("Resulted count is:",count)
+}
+
+func increment() {
+    lock.Lock() // acquire the Mutex
+    count++
+    lock.Unlock() // release the Mutex
+    // using Mutex to ensure the function operation is atomic
+    // ensure at any time only a single goroutine have access to the "count" var
+}
+```
+## **Read Write Mutex**
+- RWMutex is a read/writer mutual exclusion lock
+- this lock can be held by any number of readers OR a single writer
+```golang
+var (
+    lock sync.Mutex
+    rwLock sync.RWMutex
+    count int
+)
+
+func main() {
+    go read()
+    go read()
+    go write()
+}
+
+func read() {
+    rwLock.RLock() // acquire the READ lock
+    defer rwLock.RUnlock()
+
+    fmt.Println("Read locking")
+    time.Sleep(time.Second)
+    fmt.Println("Read Unlocking")
+}
+
+func write() {
+    rwLock.Lock() // acquire the WRITE lock
+    // this lock will block until all the READ lock has been released
+    rwLock.Unlock()
+
+    fmt.Println("Write locking")
+    time.Sleep(time.Second)
+    fmt.Println("Write Unlocking")
+}
+
+// output:
+Read locking
+Read locking
+Read Unlocking
+Read Unlocking
+Write locking
+Write Unlocking
+// the Write lock can only be acquire after the all the READ lock has released the lock
 ```
 
 # **Resource Pool**
