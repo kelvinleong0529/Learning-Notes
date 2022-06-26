@@ -215,9 +215,89 @@ Write Unlocking
 // the Write lock can only be acquire after the all the READ lock has released the lock
 ```
 
+# **Once**
+- a feature in sync package that allows us to call a certain function for only one time
+```golang
+// global variable
+var (
+    completed bool
+)
+
+func main() {
+    var once sync.Once
+    var waitGroup sync.WaitGroup
+
+    waitGroup.Add(100)
+    for i:= 0; i<100;i++ {
+        go func() {
+            if foundTreasure() {
+                once.Do(markMissionCompleted)
+                // the once.Do() here ensure the funciton inside is only executed once
+            }
+            waitGroup.Done()
+        }()
+    }
+
+    waitGroup.Wait()
+    checkMissionCompletion()
+}
+
+func checkMissionCompletion() {
+    if completed {
+        fmt.Println("Mission Completed!")
+    } else {
+        fmt.Println("Mission Failed")
+    }
+}
+
+func markMissionCompleted() {
+    completed = true
+    fmt.Println("Found Treasure!")
+}
+
+func foundTreasure() bool {
+    rand.Seed(time.Now().UnixNano())
+    return 0 == rand.Intn(10)
+}
+
+// output:
+Found Treasure!
+Mission Completed!
+```
+
 # **Resource Pool**
 - Pool in golang is to create a fixed number or a pool of things for us
 - Commonly used to constraint things that are expensive
 - A fixed number of resources (pool) will be created, and subsequent request will be able to gain access to these resources
 - `GET()` method will check whether are any available instances in the pool to return to the caller, if no it will use `NEW()` member to create the instances required
 - when the caller finish using the instances that the caller had acquired access to, it will call the `PUT()` method to place the instances back to the pool
+```golang
+func main() {
+    var numMemPieces int
+    memPool := &sync.Pool{
+        New : func() interface() {
+            numMemPieces++
+            mem := make([]byte,1024)
+            return &mem
+        }
+    }
+
+    const numWorkers = 1024*1024
+
+    var wg sync.WaitGroup
+    wg.Add(numWorkers)
+    for i:= 0; i<numWorkers; i++ {
+        go func() {
+            mem := memPool.Get().(*[]byte)
+            // tries to get the resources from the Pool
+            // if failed to get the resources
+            // then call the "New" method defined in sync.Pool
+            memPool.Put(mem)
+            // return the resource back to the Pool
+            wg.Done()
+        }
+    }
+    wg.Wait()
+    fmt.Println("%d numMemPieces were created",numMemPieces)
+}
+```
