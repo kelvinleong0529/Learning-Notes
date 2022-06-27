@@ -301,3 +301,103 @@ func main() {
     fmt.Println("%d numMemPieces were created",numMemPieces)
 }
 ```
+
+# **Signal & Broadcast**
+- can think of it as a mutex that waits on other goroutines (singal)
+- blocks until the mutex releases a signal
+- Broadcasting - passing a message to multiple goroutines
+```golang
+var ready bool
+
+func signalFunction() {
+    cond := sync.NewCond(&sync.Mutex{})
+    go gettingReady(cond)
+    var workIntervals int = 0
+    cond.L.Lock()
+    for !ready {
+        workIntervals++
+        cond.Wait() // blocks here until "cond" releases the signal
+    }
+    cond.L.Unlock()
+}
+
+func gettingReady(cond *sync.Cond) {
+    randTime := rand.Seed(time.Now().UnixNano())
+    time.Sleep(time.Second*randTime*10)
+    ready = true
+    cond.Signal()
+}
+```
+```golang
+func stanbyForMission(fn func(), broadcaster *sync.Cond) {
+    var wf sync.WaitGroup
+    wg.Add(1)
+    go func() {
+        wg.Done()
+        broadcaster.L.Lock()
+        defer broadcaster.L.Unlock()
+        broadcaster.Wait() // wait for the broadcasting signal
+        fn()
+    }()
+    wg.Wait()
+}
+
+func main() {
+    beeper := sync.NewCond(&sync.Mutex{})
+    var wg sync.WaitGroup
+    wg.Add(3)
+    stanbyForMission(func(){
+        fmt.Println("Ninja 1 starting mission")
+        wg.Done()
+    },beeper)
+    stanbyForMission(func(){
+        fmt.Println("Ninja 2 starting mission")
+        wg.Done()
+    },beeper)
+    stanbyForMission(func(){
+        fmt.Println("Ninja 3 starting mission")
+        wg.Done()
+    },beeper)
+    beeper.Broadcast()
+    wg.Wait()
+    fmt.Println("All Ninjas have started their missions")
+}
+```
+
+# **Concurrent Maps**
+- regular maps do not support concurrent operations
+- `Store()` to put / insert a new key-value pair
+- `Load()` to get a value by key
+- `Delete()` to delete a key-value pair (with key as input)
+- `LoadAndDelete()` deletes the value for a key, and try to return the previous value if any
+- `LoadOrStore()` try to get the value from the map, and if there isnt a value for the key then INSERT
+```golang
+// REGULAR MAPS
+map := make(map[int]interface{})
+
+map[0] = 0
+map[1] = 1
+map[2] = 2
+
+value, ok = map[0] // ok returns true if the key exists
+
+map[0] = nil // delete in regular map
+
+// SYNC MAP
+syncMap := sync.Map{}
+
+syncMap.Store(0,a) // 0 is the key and a is the value
+syncMap.Store(1,b)
+syncMap.Store(2,c)
+
+syncValue, syncOk := syncMap.Load(0) // check and try to retrieve the value of "0" key
+
+syncMap.Delete(1) // Delete the key "1"
+
+syncMap.LoadAndDelete(1) // delete the value for "1", and try to return the value if possible
+```
+```golang
+func main() {
+    syncMap := sync.Map{}
+}
+```
