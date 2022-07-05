@@ -146,7 +146,7 @@ func attack (ninja string, beeper *sync.WaitGroup) {
 }
 ```
 # **Mutex**
-## **1. Regular Mutex**
+## **Regular Mutex**
 ```golang
 var (
     count int
