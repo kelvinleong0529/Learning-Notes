@@ -1,12 +1,13 @@
 # **Representational State API** #
 - a standardized software architectural style
 - it's basically about communication
+- a `resource-based` protocol, which means the client tells the server what resources needs to be CRUD based on the body of the request
 -------------------------------------------------------
-## **SIMPLE / STANDARD** ##
+## **1. Simple / Standard** ##
 - no need to worry how to format data
-## **SCALABLE / STATELESS** ##
+## **2. Scalable / Stateless** ##
 - as the service grows in complexity we can easily make modifications, **stateless** meaning we dont have to worry which data is in which state and keep track of that across client and server
-## **HIGH PERFORMANCE / CACHEABLE** ##
+## **3. High performance / Cacheable** ##
 - as service gets complex the performance stays high
 ------------------------------------------------------
 - There will be an API endpoint, something like this: http://icecream.com/api/flavours
