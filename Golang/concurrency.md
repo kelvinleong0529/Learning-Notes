@@ -24,7 +24,7 @@ func main() {
 ```
 
 # **Gochannel**
-- in **Golang**, channels are a means through which different **goroutine** communicate
+- in **Golang**, channels are a mean through which different **goroutine** communicate
 - think of them as pipes through which we can connect with different concurrent goroutines, communication is bidirectional by default
 - by default, channels send and receive until the other side is ready, allowing goroutine to synchronize without explicit locks or condition variables
 ```golang
@@ -40,12 +40,11 @@ channel <-
 
 close (channel) // close a channel
 
-// both sending and receiving are blockign operations by default
+// both sending and receiving are blocking operations by default
 ```
 
 ```golang
-// Prints a greeting message using values received in
-// the channel
+// Prints a greeting message using values received in the channel
 func greet(c chan string) {
 
 	name := <- c	// receiving value from channel
@@ -68,7 +67,7 @@ func main() {
 }
 ```
 - `select` statement let's a goroutine wait on multiple communication operations
-- `select` blocks until one of it's cases can run, then it executes that case, it then chosoes one at random if multiple are ready
+- `select` blocks until one of it's cases can run, then it executes that case, if multiple cases are ready it then chooses one at random 
 ```golang
 func main() {
     ninja1 := make(chan string)
