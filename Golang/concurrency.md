@@ -129,7 +129,7 @@ func attack (ninja string, beeper *sync.WaitGorup) {
 ```
 ```golang
 func main() {
-    var evilNinjas []string = {"Tommy","Johnny","Boby"}
+    var evilNinjas []string = []string {"Tommy","Johnny","Boby"}
     var beeper sync.WaitGroup
     beeper.Add(len(evilNinjas))
     for _,ninjas := range evilNinjas {
