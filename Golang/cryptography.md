@@ -28,6 +28,7 @@ err = pem.Encode(pemPrivateFile, pemPrivateBlock)
 privateKeyFile, err := os.Open("private_key.pem")
 // read the content of the file using "buffer" from bufio package
 pemfileinfo, _ := privateKeyFile.Stat()
+// Stat() returns the FileInfo structure describing file, if there is an error, it willbe of type *PathError
 var size int64 = pemfileinfo.Size()
 pembytes := make([]byte, size)
 buffer := bufio.NewReader(privateKeyFile)
