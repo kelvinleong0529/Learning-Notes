@@ -22,3 +22,33 @@ function2.o: function2.cpp
 clean:  
     rm -rf *o hello  
 ```
+
+# **Custom Function**
+- we can define custom functions in Makefile via the following syntax:
+```MAKEFILE
+define generate_file
+    sed 's/{NAME}/$(1)/' greetings.tmpl > $(2).txt
+    # here we pass the first parameter $(1) to the {NAME} variable inside 'greetings.tmpl'
+    # 'sed' stands for 'stream editor' and it can perform lots of functions on file like searching, find and replace, insertion and deletion
+endef
+
+all:
+$(call generate_file,John Doe, 101)
+$(call generate_file,Peter Pan, 102)
+
+# Contents of greeting.tmpl:
+Hello {NAME}
+```
+- when we run `make`, it produces the following files:
+```
+// 101.txt
+Hello John Doe
+
+// 102.txt
+Hello Peter Pan
+```
+- inside the function the first parameter becomes $(1), the second becomes $(2) and so on...
+- we execute / call our custom function via the following syntax:
+```MAKEFILE
+$(call <name_of_the_function>[,<param>][,<param>][...])
+```
