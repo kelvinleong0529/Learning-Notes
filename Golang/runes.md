@@ -1,4 +1,6 @@
 # **Encoding**
+- `Golang` has no `char` data type, it uses integer types called `byte` and `rune` that are aliases for `uint8` and `int32` data types to represent characters value, these data types are used to distinguish characters from integer values
+- `byte` represents **ASCII** characters while `rune` represents a more broader set of **Unicode** that are encoded in UTF-8 format
 - Most widely accepted encoding is `UTF-8`
 - `UTF-8` is a flexible encoding that allows single bytes and multi-bytes char to coexist in one sentence or string
 - `Go` supports UTF-8 encoding (type rune), not just ASCII, for eg the code below will work fine in `Go` but maybe not other programming languages
