@@ -23,7 +23,7 @@ clean:
     rm -rf *o hello  
 ```
 
-# **Custom Function**
+# **Function**
 - we can define custom functions in Makefile via the following syntax:
 ```MAKEFILE
 define generate_file
@@ -52,3 +52,23 @@ Hello Peter Pan
 ```MAKEFILE
 $(call <name_of_the_function>[,<param>][,<param>][...])
 ```
+
+# **.PHONY**
+- by default, `MAKEFILE` **targets** are "file targets" - they are used to build file from other files, `MAKE <testing>` interprets the rule to mean **execute such-and-such recipe to create the file named `testing`**
+- However, sometimes we might need `MAKEFILE` to run commands that do not represent physical files in the file system, some of the good example for this are the common targets such as `clean` and `all`
+- But sometimes we might potentially have a file name `clean` in our main directory, and in such case `make` will be confused because by default the `clean` target would be associated with this file, and `make clean` will do nothing because  
+- `PHONY` can explicitly tell `make` that there are not associated with files, with the following syntax:
+```MAKEFILE
+.PHONY: clean
+
+clean:
+    rm -rf *.0
+
+# another way to declare phony targets is to use :: without prerequisites
+clean::
+    ...
+distclean::
+    ...
+```
+- with the syntax above, `MAKE` will run as expected even though we have a file name `clean`
+- some common `make` targets that are often **phony** are `all, install, clean, distclean, TAGS, info, check`
