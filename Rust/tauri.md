@@ -19,3 +19,7 @@ tauri build
 1. Windows: `.exe, .msi, .msi.zip`
 2. macOS: `.app, .dmg, .app.tar.gz`
 3. Linux: `.deb, .AppImage, .AppImage.tar.gz`
+
+# **Sidecar**
+- `Tauri` allows us to embed external binaries, to save our end users from installing additional dependencies (eg: Python, Node.js)
+- Read more [here](https://jonaskruckenberg.github.io/tauri-docs-wip/examples/sidecar.html)
