@@ -5,6 +5,8 @@
 # **Static Libraries**
 - we dont normally see static libraries on our computer, because static library is usually embedded directly inside of a module (EXE or DLL)
 - static library cannot be changed once it is compiled within EXE
+- using `static libraries` may result in larger program files, but enables faster loading times compared to `dynamic libraries`
+- `static libraries` are more common in Unix-like systems than in Windows system; `static libraries` are usually in `.a` extension in Unix-like system, and `.lib` in Windows system
 
 # **Dynamic Link Libraries (DLL)**
 - DLL files are like EXEs but they are not directly executable, they are Microsoft implementation of shared libraries
