@@ -28,3 +28,21 @@
 - process of including the library files into the program, `library files` are some predefined files that contain the definition of the functions in machine language (also called static libraries) which have an extension of `.lib`
 - we can assume that there are some statements or instructions written in the `object file` where our OS cannot understand, and we will use the dictionary (`library files`) to find the meaning of these "words", meaning we use `library files` to give meaning to some unknown files from the object files
 - the linking process generates an `exectuble file` with an extension of `.exe` in DOS and `.out` in UNIX OS
+
+# **Symbol Table**
+- `executable` and `object` files can contain a symbol table, where it stores the location of functions and variables by name, and can be displayed with the `nm` command
+```C
+$ nm a.out
+08048334 t Letext
+08049498 ? _DYNAMIC
+08049570 ? _GLOBAL_OFFSET_TABLE_
+........
+080483f0 T main
+08049590 b object.11
+0804948c d p.3
+         U printf@GLIBC_2.0
+```
+- based on the table above, we can notice that the `main` function has the hexadecimal offset `080483f0`
+- most of the symbols are for internal use by the compiler and operating system
+- `T` in the 2nd column indicates a function that is defined in the `object` file, while `U` indicates a function which is **undefined** (should be resolved by linking against another object file)
+- most common use of the `nm` command is to check whether a library contains the definition of a specific function, by looking for a `T` entry in the 2nd column against the function name
