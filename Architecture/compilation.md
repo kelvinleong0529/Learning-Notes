@@ -5,4 +5,15 @@
 # **MinGW**
 - `MinGW` stands for `Minimalist GNU for Windows`, it is essentially a tool set that includes some `GNU` software, including a port of GCC
 - it is a copy of `GCC` + other common utilities and libraries used in compiling and linking `C` or `C++` code using the GNU tools
-- unlike many of the platforms that `GCC` is found on, Windows lack most of the common utilities and tools
+- a collection of `GNU` development tools (GCC, etc.) that have been recompiled to run on Windows, purpose is to let us use GNU development tools to build applications that use the native Windows API
+
+# **Cygwin**
+- let us take source code written to use `POSIX APIs`, and build them to run on Windows
+- since the applications compiled using `Cygwin` are built to use `POSIX API`, they required users to install the `Cygwin DLL`, which is responsible for handling the applications' POSIX API calls into native Windows API calls
+
+| Field                                   | MinGW | Cygwin |
+|-----------------------------------------|-------|--------|
+| GNU Development Tools (GCC, etc         | Yes   | Yes    |
+| Full Set of POSIX tools                 | no    | yes    |
+| Compile native Windows API applications | yes   | yes    |
+| Compile POSIX API applications          | no    | yes    |
