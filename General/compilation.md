@@ -17,3 +17,7 @@
 | Full Set of POSIX tools                 | no    | yes    |
 | Compile native Windows API applications | yes   | yes    |
 | Compile POSIX API applications          | no    | yes    |
+
+# **Compiler Specification (Function)**
+- `__declspec(dllimport)` specifies that the function is to be imported from a sepearte dll, depending on the CRT static / dynamic linking settings
+- `__cdecl` is the calling convention used for a funciton, it tells the compiler how the funciton expects to be called (in which order parameters are pushed on to the stack, if any registers is used for parameters, where is the return value stored, who is responsible for stack cleanup,..)
