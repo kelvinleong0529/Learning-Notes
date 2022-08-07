@@ -591,4 +591,4 @@ Things need to do:
 - **CloudFormation**: infrastructure as code, set up services via templating script
 - **CloudTrail**: logs all APi calls between AWS services
 - **CloudFront**: CDN, create cached copy of our app and copies to server located near end-users who tries to visit our app
-- **ClouWatch**: 
+- **CloudWatch**: 

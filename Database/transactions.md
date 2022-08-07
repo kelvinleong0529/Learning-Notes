@@ -1,5 +1,5 @@
 # **Transactions**
-- we can use **ROLLBACK** to erase a mistake, for instance: a user would like to delete a particular row from a table, but he fired a **DELETE** statement without a **WHERE** condition (by mistake), which would delete all records from the table, however he can easily recover from mistakes if the statement is inside a transaction block (byu firing the **ROLLBACK** command)
+- we can use **ROLLBACK** to erase a mistake, for instance: a user would like to delete a particular row from a table, but he fired a **DELETE** statement without a **WHERE** condition (by mistake), which would delete all records from the table, however he can easily recover from mistakes if the statement is inside a transaction block (by firing the **ROLLBACK** command)
 - other concurrent user will not get affected by a transaction unless it gets locked
 ## **1. BEGIN**
 - **BEGIN** keyword is used to start a transaction block
