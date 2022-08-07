@@ -25,13 +25,13 @@ ROLLBACK;
 BEGIN;
     DELETE FROM TABLE WHERE AGE > 50;
     SAVEPOINT savepoint_1; 
-    # savepoint_1 is the name of the savepoint
+    -- savepoint_1 is the name of the savepoint
     DELETE FROM TABLE WHERE GENDER = "MALE";
     SAVEPOINT savepoint_2;
     DELETE FROM TABLE WHERE COUNTRY = "MALAYSIA";
     RELEASE savepoint_2;
-    # delete savepoint_2
+    -- delete savepoint_2
     ROLLBACK TO SAVEPOINT savepoint_1;
-    # return the database status back to savepoint_1
+    -- return the database status back to savepoint_1
 COMMIT;
 ```

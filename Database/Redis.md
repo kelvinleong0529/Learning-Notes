@@ -6,19 +6,19 @@
 
 # **Commands**
 ## **Basic**
-1. SET name kelvin: create a key-value pair with "name" as the key and "kelvin" as the value
-2. GET name: returns the value of the key "name"
-3. EXISTS name: check if the key "name" exists
-4. KEYS *: get all the keys
-5. SETEX name 10 kelvin: create the key-value pair that lasts for 10 seconds (SET EXPIRE)
-- **GET** only work for strings
+1. `SET name kelvin`: create a key-value pair with "name" as the key and "kelvin" as the value
+2. `GET name`: returns the value of the key "name"
+3. `EXISTS name`: check if the key "name" exists
+4. `KEYS *`: get all the keys
+5. `SETEX name 10 kelvi`n`: create the key-value pair that lasts for 10 seconds (SET EXPIRE)
+- `GET` only work for strings
 
 ## **Array**
-1. LPUSH friends kelvin: "L" stands for **left**-push, push the value "kelvin" into the **beginning** of an array called "friends"
-2. LRANGE friends 0 -1: get the elements in the array "friends" starting from index 0:-1 (means all the elements)
-3. RPUSH friends sally: "R" stands for **right**-push, push the value "kelvin" into the **end** of an array called "friends"
-4. LPOP friends: pop / remove the **left**-most element in the "friends" array
-5. RPOP friends: pop / remove the **right**-most element in the "friends" array
+1. `LPUSH` friends kelvin: "L" stands for **left**-push, push the value "kelvin" into the **beginning** of an array called "friends"
+2. `LRANGE` friends 0 -1: get the elements in the array "friends" starting from index 0:-1 (means all the elements)
+3. `RPUSH` friends sally: "R" stands for **right**-push, push the value "kelvin" into the **end** of an array called "friends"
+4. `LPOP` friends: pop / remove the **left**-most element in the "friends" array
+5. `RPOP` friends: pop / remove the **right**-most element in the "friends" array
 ```
 LPUSH friends kelvin
 LPUSH friens john
@@ -40,16 +40,16 @@ RPOP friends
 ```
 
 ## **Sets**
-1. SADD hobbies "weight lifting": add the value "weight lifting" into a set called "hobbies"
-2. SREM hobbies "weight lifiting": remove the value "weight lifting" from a set called "hobbies"
-3. SMEMBERS hobbies: return all the elements in the set called "hobbies"
+1. `SADD hobbies` "weight lifting": add the value "weight lifting" into a set called "hobbies"
+2. `SREM hobbies` "weight lifiting": remove the value "weight lifting" from a set called "hobbies"
+3. `SMEMBERS hobbies`: return all the elements in the set called "hobbies"
 
 ## **Hashes**
-1. HSET person name kelvin: add the key-value pair of "name":"kelvin" into a has object called person
-2. HGETALL person: get all the key-value pairs in the hash object called "person"
-3. HGET person name: get the value of the "name" key in the hash object called "person"
-4. HDEL person age: delete the prpoperty of age in the hash object "person"
-5. HEXISTS person name: check if the "name" property exists in the hash object called "person"
+1. `HSET person name kelvin`: add the key-value pair of "name":"kelvin" into a has object called person
+2. `HGETALL person`: get all the key-value pairs in the hash object called "person"
+3. `HGET person name`: get the value of the "name" key in the hash object called "person"
+4. `HDEL person age`: delete the prpoperty of age in the hash object "person"
+5. `HEXISTS person name`: check if the "name" property exists in the hash object called "person"
 ```
 HSET person name kelvin
 HSET person age 25
@@ -72,36 +72,3 @@ HGETALL person
 -----------
 ```
 
-# **Redis in Javascript**
-```javascript
-import redis from "redis"
-import express from "express"
-
-const redisClient = redis.createClient();
-const app = express()
-
-const DEFAULT_EXPIRATION = 3600
-
-app.get("/photos",async(req,res)=>{
-
-    const albumId = req.query.albumId
-    // try to query the "value" for "photos" with ${albumId} in redis
-    redisClient.get(`photos?albumId=${albumId}`,async(error,data)=>{
-        if (error) console.log(error)
-        if (data != null) {
-            // REDIS return the result as string, we need to PARSE it as JSON
-            return res.json(JSON.parse(data))
-        } 
-        // redis query failed, value for "photos" doesnt exist
-        else 
-        {
-            const data = await ...  // query data from somewhere else
-            // "redisClient.setex" sets an expiration time
-            // the 1st param is the key value that will apply all the config
-            redisClient.setex(`photos?albumId=${albumId}`,DEFAULT_EXPIRATION,JSON.stringify(data))
-            return res.json(data)
-        }
-    })
-})
-
-```
