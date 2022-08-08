@@ -8,6 +8,7 @@
 - For more details, [read here](https://www.thesslstore.com/blog/symmetric-encryption-101-definition-how-it-works-when-its-used/)
 
 # **Public Key Cryptography**
+- also called `RSA encryption`
 - involves a pair of keys known as `public key` and `private key`, which are associated with an entity that needs to authenticate its identity electronically or to sign or encrypt data
 - each `public key` is published and the corresponding `private key` is kept secret
 - data is encrypted with `public key` and can be decrypted with the corresponding `private key`
