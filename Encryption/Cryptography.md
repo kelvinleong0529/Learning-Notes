@@ -19,3 +19,25 @@
 ![Public Key Cryptography](https://www.ibm.com/docs/en/SSB23S_1.1.0.14/gtps7/ssldig02.gif)
 - to send encrypted data to someone, we must encrypt the data with the recevier's public key (usually is published and anyone can access), and the receiver should decrypt it with the corresponding private key
 - compared to `symmetric-key encryption`, `public-key encryption` requires more calculation, there is not always suitable for larage amount of datas
+
+# **Digital Signature Algorithm**
+- similar to [RSA encryption](#public-key-cryptography)
+1. original message is first passed to a hash function dentoed by `H#` to create a digest
+2. next, it bundles the message together with the hash digest `h` and encrypts it using the sender's private key
+3. it sends the encrypted bundle to the receiver, who can decrypt it using the sender’s public key.
+4. Once it decrypts the message, it is passed through the same hash function (H#), to generate a similar digest.
+5. It compares the newly generated hash with the bundled hash value received along with the message. If they match, it verifies data integrity.
+![DSA algorithm](https://www.simplilearn.com/ice9/free_resources_article_thumb/ds_process-DSA_Algorithm.PNG)
+## **Benefits:**
+1. `Message Authentication`: You can verify the origin of the sender using the right key combination.
+2. `Integrity Verification`: You cannot tamper with the message since it will prevent the bundle from being decrypted altogether.
+3. `Non-repudiation`: The sender cannot claim they never sent the message if verifies the signature
+
+
+
+
+# **Difference between DSA & RSA**
+
+|             | RSA                                                                                                                                  | DSA                                                                                                                                                |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Differences | more on private conversation, 1-to-1 or many-to-1 interaction, since only the person who has the private key can decrypt the message | more on broadcasting, since anyone with public key (usually published widely) can decrypt the message |
