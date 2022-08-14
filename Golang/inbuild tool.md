@@ -23,3 +23,6 @@ func main() {
     fmt.Println("Sub Package Variable=",subPackageVariable)
 }
 ```
+
+# **Go Vet**
+- `go vet` tool has the ability to check for invalid conversions between `unsafe.Pointer` and `uintptr` types
