@@ -152,3 +152,4 @@ foo
     └── bin
         └── my_other_bin.rs
 ```
+- to tell `cargo` to compile or run this binary as opposed to the default or other binaries, we just pass `cargo` the `--bin my_other_bin` flag, where `my_other_bin` is the name of the binary we want to work with
