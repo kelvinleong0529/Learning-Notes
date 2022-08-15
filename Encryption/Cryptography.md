@@ -4,6 +4,7 @@
 1. sender use an encryption key (usually a string of letters and numbers) to encrypt their data
 2. recipient use a decryption key (same as encryption key) to transform the ciphertext back into readable text
 - issue arised when the private key is stolen or leaked, hence key management requires prevention of these risks and necessitates changing the encryption key often, and appropriately distributing the key
+
 ![Symmetric Encryption](https://www.thesslstore.com/blog/wp-content/uploads/2020/11/how-encryption-works-symmetric-encryption.png)
 - For more details, [read here](https://www.thesslstore.com/blog/symmetric-encryption-101-definition-how-it-works-when-its-used/)
 
@@ -21,7 +22,7 @@
 - compared to `symmetric-key encryption`, `public-key encryption` requires more calculation, there is not always suitable for larage amount of datas
 
 # **Digital Signature Algorithm**
-- similar to [RSA encryption](#public-key-cryptography)
+- similar to [RSA encryption / Public Key Cryptography](#public-key-cryptography)
 1. original message is first passed to a hash function dentoed by `H#` to create a digest
 2. next, it bundles the message together with the hash digest `h` and encrypts it using the sender's private key
 3. it sends the encrypted bundle to the receiver, who can decrypt it using the sender’s public key.
