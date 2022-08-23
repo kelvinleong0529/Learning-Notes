@@ -31,7 +31,7 @@ use std::fs::File;
 fn main() {
     let greeting_file = File::open("hello.txt").unwrap();
 }
-// if we the code above without the "hello.txt" file, we will see the error below:
+// if we compile the code above without the "hello.txt" file, we will see the error below:
 // thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: Os {
 // code: 2, kind: NotFound, message: "No such file or directory" }',
 // src/main.rs:4:49
@@ -45,7 +45,7 @@ fn main() {
     let greeting_file = File::open("hello.txt")
         .expect("hello.txt should be included in this project");
 }
-// if we the code above without the "hello.txt" file, we will see the error below:
+// if we compile the code above without the "hello.txt" file, we will see the error below:
 // thread 'main' panicked at 'hello.txt should be included in this project: Os {
 // code: 2, kind: NotFound, message: "No such file or directory" }',
 // src/main.rs:5:10
