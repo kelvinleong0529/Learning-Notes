@@ -27,6 +27,8 @@ func main() {
 - in **Golang**, channels are a mean through which different **goroutine** communicate
 - think of them as pipes through which we can connect with different concurrent goroutines, communication is bidirectional by default
 - by default, channels send and receive until the other side is ready, allowing goroutine to synchronize without explicit locks or condition variables
+- only `sender` should close a channel, never the `receiver`, sending on a closed channel or closing a closed channel will cause a panic
+- channels aren't like files, we don't usually need to close them, closing is only necessary when the receiver must be told there are no more values coming, such as to terminate a `range` loop
 ```golang
 make (chan [value-type]) // make a channel, where [value-type] is the data type of the values to send and recive, eg: int
 
@@ -66,6 +68,36 @@ func main() {
 	close(c)
 }
 ```
+- using `channel` as a blocking operation to wait until all gorotuine has completed
+```golang
+func main() {
+    c := make(chan string)
+    go func(c chan string) {
+        temp := <- c
+        fmt.Println("Inside goroutine", temp)
+        c <- "Gorotuine completed" // send a signal when the function completes, value doesn't matter
+    } (c)
+    c <- "testing"
+    <- c // receivers always block until there is data to receive
+}
+
+// Output:
+// Inside goroutine
+
+func main() {
+    c := make(chan string)
+    go func(c chan string) {
+        temp := <- c
+        fmt.Println("Inside goroutine", temp)
+    } (c)
+    c <- "testing"
+    // we dont add a receiver tom listen the data
+    // main function might not wait until the goroutine has completed
+}
+
+// Output:
+// empty output
+```
 - `select` statement let's a goroutine wait on multiple communication operations
 - `select` blocks until one of it's cases can run, then it executes that case, if multiple cases are ready it then chooses one at random 
 ```golang
@@ -91,6 +123,21 @@ func main() {
 
 func captainnElect(ninja chan string, message string) {
     ninja <- message
+}
+```
+## **Buffered Channels**
+- blocking nature of channels can be inefficient when we want to send data values without having to wait for the other end to respond
+- channels can be `buffered`, which allow us to specify a fixed length of buffer capacity so we can send that number of data values at once, `ch := make(chan int,100)`
+- these channels are only blocked when the buffer is full, and the receiving channel will only block when the buffer is empty
+```golang
+func main() {
+    ch := make(chan int, 3)
+    ch <- 5
+    ch <- 10
+    ch <- 15
+    fmt.Println(<- ch)
+    fmt.Println(<- ch)
+    fmt.Println(<- ch)
 }
 ```
 
