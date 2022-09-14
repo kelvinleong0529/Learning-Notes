@@ -4,6 +4,12 @@
 - Mostly used for **CACHING**, things that we access a lot, or those that need alot of time to compute
 - Redis is to be built on top of a traditional database, sitting in front of **MONGODB**, **POSTGRESQL**, if we have data that need to queried frqeuently, can stored the data in **REDIS** (both in the traditional databases as well)
 
+# **Redis Single-Threaded Model**
+- Although `redis` is single-threaded, it can provide concurrency at I/O by using an I/O multiplexing mechanism and an event loop
+- `parallelism` has a cost, with the multiple sockets / multiple cores that we can find on modern hardware, synchronization between threads is extremely expensive
+- the bottleneck of `redis` is often the **network**, well before the CPU, hence isolated event loops (which require no synchronization) are seens as a good design to build efficient, scalable servers
+- `redis` are singled-threaded as they are meant to be designed to prevent any lock contention and thus their memory access is blazing fast (the reason developers do not traditionally notice performance speed advantage in single cores is because they are used to working with slow libraries and slow code)
+
 # **Basic Commands**
 1. `SET name kelvin`: create a key-value pair with "name" as the key and "kelvin" as the value
 2. `GET name`: returns the value of the key "name"
