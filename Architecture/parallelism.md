@@ -11,6 +11,14 @@
 - Threads are lighter than process, and they share the same memory space
 - PARALLELISM IS A SUBSET OF CONCURRENCY
 
+# **Coroutines**
+- coroutines define the execution of a set of instructions for a processor to execute
+- it has a similar life cycle to that of threads, and is executed inside of a thread
+- one thread can have many coroutines inside it, but only one instruction can be executed in a thread at a given time, eg: if we have 10 coroutines in the same thread, only 1 of them will be running at a given point in time
+- biggest difference between threads and coroutine is that coroutines are fast and cheap to create, spawning thousand of coroutines can be easily done, and it is faster and require fewer resources than spawning thousand of threads
+- although coroutine is executed inside a thread, it's not bound to it, meaning it's possible to execute part of a coroutine in a thread, suspend the execution, and later continue in a different thread
+![parallelism](https://static.packt-cdn.com/products/9781788627160/graphics/assets/4435aef0-eb0f-4a75-a6aa-ff8bf9462740.png)
+
 # **Web Crawling**
 - I/O is the bottleneck here, the act of going to the net to retrieve a page (I/O) is slower than analysing the page (CPU)
 - So making the CPU bit 10 times faster will have little effect on the overall time taken, whereas doubling the I/O speed will have a very beneficial effect, right to the point where the CPU starts being the bottleneck
