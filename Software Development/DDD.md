@@ -1,0 +1,13 @@
+# **Domain-Driven Development**
+- a software engineering approach to solve a specific domain model
+- the solution **circles around the business model** by connecting execution to the key business principles
+  
+# **Advantages of Domain-Driven Development**
+1. **Simpler communication**: Thanks to the Ubiquitous Language, communication between developers and teams becomes much easier. As the ubiquitous language is likely to contain simpler terms developers refer to, there’s no need for complicated technical terms.
+2. **More flexibility**: As DDD is object-oriented, everything about the domain is based on and object is modular and caged. Thanks to this, the entire system can be modified and improved regularly.
+3. **The domain is more important than UI/UX**: As the domain is the central concept, developers will build applications suited for the particular domain. This won’t be another interface-focused application. Although you shouldn’t leave out UX, using the DDD approach means that the product targets exactly the users that are directly connected to the domain.
+
+# **Downsides of Domain-Driven Development**
+1. **Deep domain knowledge is needed**: Even for the most technologically advanced teams working on development, there has to be at least one domain specialist on the team who understands the precise characteristics of the subject area that’s the center of the application. Sometimes there’s a need for several team members who thoroughly know the domain to incorporate in the development team.
+2. **Contains repetitive practices**: Although many would say this is an advantage, the domain-driven design contains many repetitive practices. DDD encourages the use of continuous integration to build strong applications that can adapt themselves when necessary. Many organizations may have difficulties with these methods. More particularly, if their previous experience is generally tied to less-flexible models of growth, like the waterfall model.
+3. **It might not work best for highly-technical projects**: Domain-driven design is perfect for applications that have complex business logic. However, it might not be the best solution for applications with minor domain complexity but high technical complexity. Applications with great technical complexity can be very challenging for business-oriented domain experts. This could cause many limitations that might not be solvable for all team members.
