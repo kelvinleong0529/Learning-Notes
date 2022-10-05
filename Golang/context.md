@@ -1,0 +1,6 @@
+# **Context**
+- when developing a large application, especially in server software, seomtimes it's helpful for a function to know more about the environment it's being executed
+- for example, if a client made a response to the server, and the client got disconnected before receiving the response. If the server function serving the response doesn't know the client disconnected, the server software may end up spending more computing time and resources that it needs to calculating a response that will never be used
+- if the above case, being aware of the context of the request, such as the client's connection status, allowas the server to stop processing the request once the clients got disconnected. This saves valuable compute resources on a busy server and frees them up to handle another client's request. This type of information can also be helpful in other contexts where functions take time to execute, such as making database calls
+- to enable ubiquitous access to this type of information, Go has included a `context` package in its standard library
+- by using the `context.Context` interface in the `context` package and passing it from function to function, programs can convey that information from the beginning function of a program, such as `main`, all the way to the deepest function call in the program
