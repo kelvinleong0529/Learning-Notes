@@ -1,6 +1,9 @@
 # **Interfaces**
 - typescript `interfaces` define the contracts within our code
 - they provide explicit names for type checking
+- using Pascal naming conventions
+- the first letter of interface should be capital letter
+- interfaces are purely for decorations, they cannot include any implementations
 ```typescript
 interface Person {
     firstName: string;

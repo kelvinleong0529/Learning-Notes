@@ -43,3 +43,6 @@ const language = {
 
 const ageAndExtensions = pickObjectKeys(language, ['age', 'extensions'])
 ```
+- `<T, K extends keyof T>` declares 2 params types for the function, where `K` is assigned a type that is the union of the keys in `T`
+-  The `obj` function parameter is then set to whatever type T represents, and `keys` to an array of whatever type `K` represents.
+-  Since `T` in the case of the `language` object sets `age` as a number and `extensions` as an array of strings, the variable `ageAndExtensions` will now be assigned the type of an object with properties `age: number` and `extensions: string[]`.
