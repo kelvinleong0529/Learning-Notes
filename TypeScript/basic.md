@@ -40,22 +40,8 @@ message = "abc";
 let endsWithC = (<string>message).endsWith("C");
 let endsWithC = (message as string).endsWith("C")  // explicitly tell TypeScript that message is of type string
 ```
-## **Interfaces**
-- using Pascal naming conventions
-- the first letter of interface should be capital letter
-- interfaces are purely for decorations, they cannot include any implementations
-```typescript
-let employee = {}
-employee.name = "John" //Compiler Error: Property 'name' does not exist on type '{}'
-employee.code = 123 //Compiler Error: Property 'code' does not exist on type '{}'
 
-interface Employee {
-    name: string;
-    code: number
-}
-```
-
-# **TypeScript Class**
+# **Class**
 - adheres to **cohesion** rule in OOP
 - everything related should be grouped in a class
 ```typescript
