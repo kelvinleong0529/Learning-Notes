@@ -20,42 +20,13 @@ const ColorRed = 0;
 const ColorGreen = 1;
 const ColorBlue = 2;
 
-enum Color = {Red =0;Green =1, Blue= 2}
+enum Color = {Red =0, Green =1, Blue= 2}
 let backgroundColor = Color.Red
 // the following will result in compiltation error
 var num:number = "Hello"
 ```
 
-# **Type Assertion**
-- a way to tell the compiler the type of a variable to access the intellisense
-- this will not change the type of the variable at runtime
-```typescript
-// allows the function the validate the input parameter
-let employeeFunction = (employee:Employee) {
-    // ..
-}
-
-let message; // TypeScript will assume the type to be any at this point
-message = "abc";
-let endsWithC = (<string>message).endsWith("C");
-let endsWithC = (message as string).endsWith("C")  // explicitly tell TypeScript that message is of type string
-```
-## **Interfaces**
-- using Pascal naming conventions
-- the first letter of interface should be capital letter
-- interfaces are purely for decorations, they cannot include any implementations
-```typescript
-let employee = {}
-employee.name = "John" //Compiler Error: Property 'name' does not exist on type '{}'
-employee.code = 123 //Compiler Error: Property 'code' does not exist on type '{}'
-
-interface Employee {
-    name: string;
-    code: number
-}
-```
-
-# **TypeScript Class**
+# **Class**
 - adheres to **cohesion** rule in OOP
 - everything related should be grouped in a class
 ```typescript
