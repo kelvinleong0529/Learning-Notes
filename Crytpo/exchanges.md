@@ -24,6 +24,7 @@
 - `decentralized exchange (DEX)` is built on the blockchain that allows people to trade their digital assets on a secure and transparent platform without any intermediates
 - `DEX` has essential features of `CEX`, and it stands out for facilitating the trade of all the coins available virtually, meaning traders do not need to be concerned about limited coin lisiting in `DEX`
 - in `CEX`, 3rd parties look after the security and manage fund similar to banks and stock exchanges; `DEX` substitute the role of these 3rd parties with self-executing smart contracts to help simplify the exchange process
+- allow for `peer-to-peer (P2P)` trading, which refers to a marketplace that links buyer and sellers of cryptocurrencies, and are usually non-custodial, which means user keep control of their wallet's private keys
 
 ## **How DEX works?**
 - `DEX` have evolved through multiple iterations, with 1st gen `DEX` using **Order Books**, and latest `DEX` implementing a new mechanism called **Automated Market Maker (AMM)**
