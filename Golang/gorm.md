@@ -190,3 +190,55 @@ type Language struct {
 db.First(&Language{})
 // SELECT * FROM `languages` ORDER BY `languages`.`code` LIMIT 1
 ```
+
+# **Associations**
+
+## **Belongs To**
+- `belongs to` sets up a one-to-one connection with another model, such that each instance of the declaring model "belongs to" one instance of the other model
+```golang
+type User struct {
+  gorm.Model
+  Name      string
+  CompanyID int
+  Company   Company
+}
+
+type Company struct {
+  ID   int
+  Name string
+}
+```
+- in the example above, each user can be assigned to exactly one company
+- inside the `user` object, there is both a `CompanyID` as well as a `Company`, the `CompangID` is implicitly used to create a foreign key relationship between the `User` and `Company` tables, and thus must be included in the `User` struct in order to fill the `Company` inner struct
+
+```golang
+// override foreign key
+type User struct {
+  gorm.Model
+  Name         string
+  CompanyRefer int
+  Company      Company `gorm:"foreignKey:CompanyRefer"`
+  // use User.CompanyRefer as foreign key
+}
+
+type Company struct {
+  ID   int
+  Name string
+}
+```
+
+```golang
+// override references
+type User struct {
+  gorm.Model
+  Name      string
+  CompanyID string
+  Company   Company `gorm:"references:Code"` // use Company.Code as references
+}
+
+type Company struct {
+  ID   int
+  Code string
+  Name string
+}
+```
