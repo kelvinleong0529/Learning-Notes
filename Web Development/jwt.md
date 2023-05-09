@@ -1,5 +1,5 @@
 # **JSON Web Tokens**
-- `JSOn web tokens (JWT)` is an open stnadard that defines a compact and self-contained way for securely transmitting information between parties as a JSON object
+- `JSON web tokens (JWT)` is an open stnadard that defines a compact and self-contained way for securely transmitting information between parties as a JSON object
 - this information can be verified and trusted because it is digitally signed using a secret (with HMAC) or a public/private key pair using RSA or ECDSA
 
 # **Why use JSON Web Tokens**
