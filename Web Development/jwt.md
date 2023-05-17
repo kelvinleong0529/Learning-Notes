@@ -1,12 +1,12 @@
 # **JSON Web Tokens**
-- `JSON web tokens (JWT)` is an open stnadard that defines a compact and self-contained way for securely transmitting information between parties as a JSON object
+- `JSON web tokens (JWT)` is an open standard that defines a compact and self-contained way for securely transmitting information between parties as a JSON object
 - this information can be verified and trusted because it is digitally signed using a secret (with HMAC) or a public/private key pair using RSA or ECDSA
 
 # **Why use JSON Web Tokens**
 
 ## **Authorization**
-- once user is logged in, each subsequent request will include JWTm allowing user to access routes, services, and resources that are permitted with that token
-- `Single Sign On` is a featrure that widely uses JWT nowadays, because of its small overhead and its ability to be easily used accross different domains
+- once user is logged in, each subsequent request will include JWT allowing user to access routes, services, and resources that are permitted with that token
+- `Single Sign On` is a feature that widely uses JWT nowadays, because of its small overhead and its ability to be easily used accross different domains
 
 ## **Information Exchange**
 - JWT are a good way to securely transmitting information between parties

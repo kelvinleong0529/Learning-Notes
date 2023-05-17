@@ -10,3 +10,27 @@
 2. Multiplexing to send multiple requests and receive multiple responses simultaneously over a single TCP connection
 3. Persistent TCP connections for multiple sequential requests and responses on a single TCP connection
 4. Binary format support such as protocol buffers
+
+# **Protocol Buffer Data Format**
+- `protocol buffers` are essentialy data format, like JSON, XML
+- the main advantage of `protocol buffers` is that it's a lot smaller compared to the likes of XML or even JSON
+- Imagine we have a person, who's data we wanted to represent in XML, JSON and protocol buffer data format:
+### **1. XML**
+```xml
+<person>
+  <name>Elliot</name>
+  <age>24</age>
+</person>
+```
+### **2. JSON**
+```json
+{
+  "name": "Elliot",
+  "age": 24
+}
+```
+### **2. Protocol Buffer Data Format**
+```
+[10 6 69 108 108 105 111 116 16 24]
+```
+- if we look closely at the above wire encoded output, we may see that starting from position 2, the name `elliot` is spelled out, `e=69`, `l=108` and so on
