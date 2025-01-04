@@ -1,6 +1,6 @@
 # **RSA**
 
-[PEM](../Encryption/PEM.md)
+[PEM](../Encryption/privacy_enhanced_mail)
 - we will try to use `Go` built-in library to encrypt and decrypt PEM files
 ```golang
 // use crypto/rsa lib to generate a private key

@@ -1,5 +1,5 @@
 # **PEM Files**
-- `Privacy Enchanced Mail (PEM)` is a standard, they contain text (in the format below), everything in between is base64 encoded, and this forms a block of data that can be used in other programs. A single PEM file can contain multiple blocks
+- `Privacy Enhanced Mail (PEM)` is a standard, they contain text (in the format below), everything in between is base64 encoded, and this forms a block of data that can be used in other programs. A single PEM file can contain multiple blocks
 - a container file format often used to store crytographic keys, it simply defines the structure and encoding type of the file used to store a bit of data
 - PEM files can be used to represent all kinds of data, but its commonly used to encode keyfiles, such as `RSA keys` used for `SSH`, and certificates used for `SSQL encryption`. Usually a PEM file will tell us what it's used for in the header
 - `X.509` is a standard defining the format of public-key certificiates

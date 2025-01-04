@@ -1,4 +1,4 @@
-# **Network Programming**
+# **Network**
 - Go's `net` package provides a protable interface for network I/O, including TCP/IP, UDP, domain name resolution and Unix domain sockets
 - `net.Dial()` and `net.Listen()` return data types that implements the io.Reader and io.Writer interfaces, meaning we can use regular `File I/O` functions to send and receive data from a TCP/IP connection
 - 

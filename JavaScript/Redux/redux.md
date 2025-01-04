@@ -98,8 +98,9 @@ const reducer = function (state=[],action) {
 module.exports = [reducer]
 ```
 ## **3. Creating the store**
+
 ```javascript
-import {createStore} from "redux";
+import {createStore} from "JavaScript/Redux/redux";
 import {reducer} from "./reducer";
 
 // pass in the reducer function as the argument to "createStore"

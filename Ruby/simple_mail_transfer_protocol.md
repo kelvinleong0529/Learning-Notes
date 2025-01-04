@@ -1,4 +1,4 @@
-# **Sending E-mail**
+# **Simple Mail Transfer Protocol**
 - Simple Mail Transfer Protocol (SMTP) is a protocol, which handles sending e-mail and routing e-mail between mail servers
 - Ruby provides Net::SMTP class for Simple Mail Transfer Protocol (SMTP) client-side connection and provides two class methods new and start
 1. The new takes two parameters:
